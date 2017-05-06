@@ -84,7 +84,7 @@ int stream_to_command(metrics *m, void *data, stream_callback cb, char *cmd) {
     // Wait for termination
     do {
         usleep(100000);
-        if (waitpid(pid, &status, 0) < 0) break;
+        if (waitpid(pid, &status, WNOHANG) < 0) break;
     } while (!WIFEXITED(status));
 
     // Return the result of the process
